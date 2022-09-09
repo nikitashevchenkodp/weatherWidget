@@ -28,12 +28,12 @@ class WeatherWidget {
         this.dataSevenDays = null;
         this.init();
     }
-    _getMoreDays() {
+    getMoreDays() {
         if (!this.dataSevenDays) {
             this.getData(this.location, 7)
                 .then((res) => {
                 this.dataSevenDays = res;
-                this._renderMoreDays(res);
+                this.renderMoreDays(res);
             })
                 .then(() => document.querySelector('.weather__seven').classList.toggle('weather__open'));
         }
@@ -51,16 +51,15 @@ class WeatherWidget {
         this.wheatherContainer.innerHTML = `Loading..............`;
         this.getData(this.location)
             .then((data) => this.render(data))
-            .then(() => this._innitEventListeners());
+            .then(() => this.innitEventListeners());
     }
     changeLocation(newLocation) {
         localStorage.setItem('location', newLocation);
         this.location = newLocation;
-        console.log(this.location);
         this.dataSevenDays = null;
         this.init();
     }
-    _checkImage(text) {
+    checkImage(text) {
         if (text.toLowerCase().includes('rain')) {
             return `./assets/Group 8night_rain.png`;
         }
@@ -71,10 +70,10 @@ class WeatherWidget {
             return `./assets/Group 16sunny_cloudddd.svg`;
         }
     }
-    _innitEventListeners() {
+    innitEventListeners() {
         this.wheatherContainer.querySelector('.weather__more').addEventListener('click', () => {
             this.wheatherContainer.querySelector('.weather__settings').classList.remove('weather__settings__open');
-            this._getMoreDays();
+            this.getMoreDays();
         });
         this.wheatherContainer.querySelector('.weather__settings-btn').addEventListener('click', () => {
             this.wheatherContainer.querySelector('.weather__seven') &&
@@ -86,7 +85,7 @@ class WeatherWidget {
             this.changeLocation(input.value);
         });
     }
-    _renderMoreDays(data) {
+    renderMoreDays(data) {
         const { forecast } = data;
         const items = forecast.forecastday
             .map((dayItem) => {
@@ -116,13 +115,12 @@ class WeatherWidget {
         this.wheatherContainer.insertAdjacentHTML('beforeend', content);
     }
     render(data) {
-        console.log(data);
         const { current } = data;
         this.wheatherContainer.innerHTML = `
         <img class="weather__settings-btn" src="./assets/OOjs_UI_icon_advanced-invert.svg"/>
         <div class="weather__inner">
             <div class="weather__main">
-                <img class="weather__image" src="${this._checkImage(current.condition.text)}" />
+                <img class="weather__image" src="${this.checkImage(current.condition.text)}" />
                 <div>
                     <div class="weather__degrees">${current.temp_c}°</div>
                     <div class="weather__location">${this.location}</div>
