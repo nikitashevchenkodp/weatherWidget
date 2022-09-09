@@ -1,10 +1,5 @@
 const daysInWeek: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-// type WeatherOptions = {
-//   ellementToAppend: string;
-//   location: string;
-// };
-
 type Day = {
   date: string;
   day: {
@@ -38,11 +33,11 @@ type Options = {
 };
 
 class WeatherWidget {
-  data: Data;
-  ellementToAppend: HTMLElement;
+  data: Data | null;
+  ellementToAppend: HTMLElement | null;
   wheatherContainer: HTMLElement | null;
   location: string;
-  dataSevenDays: object;
+  dataSevenDays: Data | null;
 
   constructor(options: Options) {
     this.ellementToAppend = document.querySelector(options.ellementToAppend);
@@ -72,9 +67,9 @@ class WeatherWidget {
           this.dataSevenDays = res;
           this._renderMoreDays(res);
         })
-        .then(() => document.querySelector('.weather__seven').classList.toggle('weather__open'));
+        .then(() => document.querySelector('.weather__seven')!.classList.toggle('weather__open'));
     } else {
-      document.querySelector('.weather__seven').classList.toggle('weather__open');
+      document.querySelector('.weather__seven')!.classList.toggle('weather__open');
     }
   }
 
@@ -83,7 +78,7 @@ class WeatherWidget {
       const weather = document.createElement('div');
       weather.classList.add('weather');
       this.wheatherContainer = weather;
-      this.ellementToAppend.append(this.wheatherContainer);
+      this.ellementToAppend!.append(this.wheatherContainer);
     }
     this.wheatherContainer.innerHTML = `Loading..............`;
     this.getData(this.location)
@@ -110,17 +105,19 @@ class WeatherWidget {
   }
 
   _innitEventListeners(): void {
-    this.wheatherContainer.querySelector('.weather__more').addEventListener('click', () => {
-      this.wheatherContainer.querySelector('.weather__settings').classList.remove('weather__settings__open');
+    this.wheatherContainer!.querySelector('.weather__more')!.addEventListener('click', () => {
+      this.wheatherContainer!.querySelector('.weather__settings')!.classList.remove('weather__settings__open');
       this._getMoreDays();
     });
-    this.wheatherContainer.querySelector('.weather__settings-btn').addEventListener('click', () => {
-      this.wheatherContainer.querySelector('.weather__seven') &&
-        this.wheatherContainer.querySelector('.weather__seven').classList.remove('weather__open');
-      this.wheatherContainer.querySelector('.weather__settings').classList.toggle('weather__settings__open');
+
+    this.wheatherContainer!.querySelector('.weather__settings-btn')!.addEventListener('click', () => {
+      this.wheatherContainer!.querySelector('.weather__seven') &&
+        this.wheatherContainer!.querySelector('.weather__seven')!.classList.remove('weather__open');
+      this.wheatherContainer!.querySelector('.weather__settings')!.classList.toggle('weather__settings__open');
     });
-    this.wheatherContainer.querySelector('.weather__button').addEventListener('click', () => {
-      const input: HTMLInputElement = this.wheatherContainer.querySelector('.weather__settings-input');
+
+    this.wheatherContainer!.querySelector('.weather__button')!.addEventListener('click', () => {
+      const input: HTMLInputElement = this.wheatherContainer!.querySelector('.weather__settings-input')!;
       this.changeLocation(input.value);
     });
   }
@@ -152,13 +149,13 @@ class WeatherWidget {
             </ul>
         </div>
         `;
-    this.wheatherContainer.insertAdjacentHTML('beforeend', content);
+    this.wheatherContainer!.insertAdjacentHTML('beforeend', content);
   }
 
   render(data: Data): void {
     console.log(data);
     const { current } = data;
-    this.wheatherContainer.innerHTML = `
+    this.wheatherContainer!.innerHTML = `
         <img class="weather__settings-btn" src="./assets/OOjs_UI_icon_advanced-invert.svg"/>
         <div class="weather__inner">
             <div class="weather__main">
