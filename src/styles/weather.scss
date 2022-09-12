@@ -1,0 +1,195 @@
+.weather {
+  width: 350px;
+  margin: 0 auto;
+  background-color: blue;
+  padding: 40px;
+  padding-bottom: 20px;
+  border-radius: 40px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
+    inset 0px 0px 38px -6px rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s;
+  overflow: hidden;
+  justify-content: center;
+  color: #f6f6f9;
+  position: relative;
+
+  &__settings {
+    max-height: 0;
+    transition: 0.5s;
+    opacity: 0;
+    pointer-events: none;
+    &__open {
+      max-height: 100vh;
+      opacity: 1;
+      pointer-events: all;
+    }
+    &-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: left;
+      label {
+        margin-bottom: 10px;
+      }
+
+      input {
+        border-radius: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: transparent;
+        height: 30px;
+        color: #fff;
+      }
+    }
+  }
+
+  &__settings-btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-image: url("../assets/OOjs_UI_icon_advanced-invert.svg");
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  &__inner {
+    height: 100%;
+    width: 100%;
+  }
+  &__image {
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    &-rain {
+      background-image: url("../assets/Group 8night_rain.png");
+    }
+    &-sun {
+      background-image: url("../assets/Ellipse 4sun.svg");
+    }
+    &-cloudy {
+      background-image: url("../assets/Group 16sunny_cloudddd.svg");
+    }
+  }
+  &__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  &__location {
+    font-size: 25px;
+  }
+  &__extra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  &__degrees {
+    font-size: 74px;
+  }
+  &__data {
+    margin-top: auto;
+    font-size: 12px;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  &__more {
+    text-align: center;
+    cursor: pointer;
+  }
+  &__seven {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+  }
+  &__open {
+    max-height: 100vh;
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &__list {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      list-style: none;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      & > * {
+        width: 30%;
+        text-align: left;
+      }
+      .temperature {
+        margin-left: auto;
+        text-align: right;
+      }
+      .condition {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      list-style: none;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      &:last-child {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      & > * {
+        width: 30%;
+        text-align: left;
+      }
+    }
+  }
+  &__temperature {
+    text-align: right;
+    margin-left: auto;
+  }
+  &__condition {
+    display: flex;
+    justify-content: center;
+  }
+  &__condition__img {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+  }
+  &__icon {
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    &-wind {
+      background-image: url("../assets/Group 35wind_icon.svg");
+    }
+    &-cloud {
+      background-image: url("../assets/cloudcloud_icon.svg");
+    }
+    &-uv {
+      background-image: url("../assets/Vectoruv_icon.svg");
+    }
+  }
+}
